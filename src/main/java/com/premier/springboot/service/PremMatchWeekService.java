@@ -6,14 +6,14 @@ import com.premier.springboot.model.PremMatchWeek;
 
 public interface PremMatchWeekService {
 	
-	public PremMatchWeek matchweekUpdate(PremMatchWeek premMatchWeek);
+	PremMatchWeek matchweekAdd(PremMatchWeek premMatchWeek);
 	
 	List<PremMatchWeek>  allMatches();
 	
 	List<PremMatchWeek> individualMatchResult(String teamName);
+	void deleteSingleMatchWeek(String id);
 	
-	//List<String> getTeamNames(String teamName);
-	
+	PremMatchWeek updateMatchWeek(String id,PremMatchWeek premMatchWeek);
 	
 	
 
