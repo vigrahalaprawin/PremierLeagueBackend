@@ -11,4 +11,7 @@ public interface PremMatchWeekRepository extends JpaRepository<PremMatchWeek, Lo
 	
 	 @Query(value = "select * from match_week where away_team=:teamName OR  home_team=:teamName",nativeQuery=true)
 	 List<PremMatchWeek> findAllSortedByteamName(String teamName);
+	 
+	 
+	 void deleteById(Long id);
 }
