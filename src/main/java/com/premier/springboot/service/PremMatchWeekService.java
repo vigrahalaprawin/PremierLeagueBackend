@@ -11,6 +11,7 @@ public interface PremMatchWeekService {
 	List<PremMatchWeek>  allMatches();
 	
 	List<PremMatchWeek> individualMatchResult(String teamName);
+	
 	void deleteSingleMatchWeek(String id);
 	
 	PremMatchWeek updateMatchWeek(String id,PremMatchWeek premMatchWeek);

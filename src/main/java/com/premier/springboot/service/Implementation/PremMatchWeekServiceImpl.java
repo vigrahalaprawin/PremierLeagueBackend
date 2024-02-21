@@ -60,8 +60,7 @@ public class PremMatchWeekServiceImpl implements PremMatchWeekService {
 	      
 	      PremMatchWeek updatedTeam = premMatchWeekRepo.save(pmw); 
 	      return updatedTeam;
-			
-			//return ResponseEntity.ok(updatedTeam);
+	
 		}
 	
 
