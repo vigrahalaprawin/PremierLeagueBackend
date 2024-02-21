@@ -13,5 +13,7 @@ public interface PremierRepository  extends JpaRepository<PremierLeague, Long>  
 	
 	 @Query(value = "select team_name from premier",nativeQuery=true)
 	 List<String>   allPremierTeams();
+	 
+	 
 
 }

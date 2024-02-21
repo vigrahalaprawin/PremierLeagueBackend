@@ -17,6 +17,7 @@ import com.premier.springboot.model.PremMatchWeek;
 import com.premier.springboot.model.PremierLeague;
 import com.premier.springboot.repository.PremMatchWeekRepository;
 import com.premier.springboot.repository.PremierRepository;
+import com.premier.springboot.service.PremierServiceRepo;
 
 import java.util.List;
 
@@ -31,6 +32,10 @@ public class PremierController {
 	
 	@Autowired
 	private PremMatchWeekRepository premMatchWeek;
+	
+	@Autowired
+	private PremierServiceRepo premierServiceRepo;
+
 	
 	
 	@RequestMapping("/")
@@ -64,13 +69,9 @@ public class PremierController {
 	@PutMapping("/updateTeam/{id}")
 	public ResponseEntity<PremierLeague> updatePremTeam(@PathVariable String id,
 			@RequestBody PremierLeague premLeague){
-		PremierLeague premierLeague = premierRepository.findById(Long.parseLong(id)).orElseThrow(
-				()-> new ResourceNotFoundException("Prem team not exist"));
-		premierLeague.setTeamName(premLeague.getTeamName());
-		premierLeague.setTeamCoach(premLeague.getTeamCoach());
-		premierLeague.setTeamStadium(premLeague.getTeamStadium());	
-		PremierLeague updatedTeam = premierRepository.save(premierLeague);
-		return ResponseEntity.ok(updatedTeam);
+		
+		  return premierServiceRepo.updatePremTeam(id, premLeague);
+		
 	}
 	
 	@DeleteMapping("/deleteTeam/{id}")
