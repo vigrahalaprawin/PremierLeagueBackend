@@ -69,9 +69,7 @@ public class PremierController {
 	@PutMapping("/updateTeam/{id}")
 	public ResponseEntity<PremierLeague> updatePremTeam(@PathVariable String id,
 			@RequestBody PremierLeague premLeague){
-		
-		  return premierServiceRepo.updatePremTeam(id, premLeague);
-		
+		  return premierServiceRepo.updatePremTeam(id, premLeague);	
 	}
 	
 	@DeleteMapping("/deleteTeam/{id}")
