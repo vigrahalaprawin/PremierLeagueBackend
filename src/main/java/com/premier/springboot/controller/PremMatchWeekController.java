@@ -3,7 +3,7 @@ package com.premier.springboot.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.premier.springboot.model.PremMatchWeek;
+
 import com.premier.springboot.service.PremMatchWeekService;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -23,10 +24,7 @@ public class PremMatchWeekController {
 	
 	@Autowired
 	PremMatchWeekService premMatchWeekService;
-	
-	
-	
-	
+		
 	@PostMapping("/addMatchWeek")
 	public PremMatchWeek createMatchWeek(@RequestBody PremMatchWeek premMatchWeek) {
 		return premMatchWeekService.matchweekAdd(premMatchWeek);
@@ -43,18 +41,22 @@ public class PremMatchWeekController {
 	}
 	
 	
+
 	@DeleteMapping("/MatchWeek/{matchWeek_id}")
 	public List<PremMatchWeek> deleteMatchWeek(@PathVariable String matchWeek_id){
 			premMatchWeekService.deleteSingleMatchWeek(matchWeek_id);
 			return premMatchWeekService.allMatches();
-
 	}
 	
 	@PutMapping("/MatchWeek/{matchWeek_id}")
-	public PremMatchWeek updateMatchWeek(@PathVariable String matchWeek_id,@RequestBody PremMatchWeek premMatchWeek){
-			
+	public PremMatchWeek updateMatchWeek(@PathVariable String matchWeek_id,@RequestBody PremMatchWeek premMatchWeek){			
 		return premMatchWeekService.updateMatchWeek(matchWeek_id, premMatchWeek);
-
+	}
+	
+	@GetMapping("/teamResultsMatchWeek/{matchId}")
+	public ResponseEntity<List<PremMatchWeek>> getResultsByMatchWeek(@PathVariable String matchId) {		
+		List<PremMatchWeek>  resultData = premMatchWeekService.getAllByMatchWeekId(matchId);
+		return ResponseEntity.ok(resultData);
 	}
 
 	

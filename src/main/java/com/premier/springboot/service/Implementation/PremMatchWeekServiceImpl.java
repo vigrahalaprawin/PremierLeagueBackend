@@ -19,10 +19,10 @@ public class PremMatchWeekServiceImpl implements PremMatchWeekService {
 	@Autowired
 	PremMatchWeekRepository premMatchWeekRepo;
 	
+	
 
 	@Override
 	public PremMatchWeek matchweekAdd(PremMatchWeek premMatchWeek) {
-		premMatchWeekRepo.save(premMatchWeek);
 		return premMatchWeekRepo.save(premMatchWeek);
 	}
 
@@ -36,12 +36,6 @@ public class PremMatchWeekServiceImpl implements PremMatchWeekService {
 		return premMatchWeekRepo.findAllSortedByteamName(teamName);
 		}
 
-	
-	
-	public List<PremMatchWeek> gettingteamname(String teanName){
-	
-		return premMatchWeekRepo.findAllSortedByteamName(teanName);
-	}	
 	
 	public void deleteSingleMatchWeek(String matchId) {
 		premMatchWeekRepo.deleteById(Long.parseLong(matchId));
@@ -63,5 +57,12 @@ public class PremMatchWeekServiceImpl implements PremMatchWeekService {
 	
 		}
 	
+	
+	public List<PremMatchWeek> getAllByMatchWeekId(String matchId){
+		
+		return premMatchWeekRepo.findAllById(Long.parseLong(matchId));
+	
+	}
+
 
 }
