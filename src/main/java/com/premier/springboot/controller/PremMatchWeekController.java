@@ -35,30 +35,35 @@ public class PremMatchWeekController {
 		return premMatchWeekService.allMatches();
 	}
 	
-	@GetMapping("/teamResults/{teamName}")
+	@GetMapping("/matchWeekResults/{teamName}")
 	public List<PremMatchWeek> getIndividualTeamResults(@PathVariable String teamName){
 		return premMatchWeekService.individualMatchResult(teamName);
 	}
 	
 	
 
-	@DeleteMapping("/MatchWeek/{matchWeek_id}")
+	@DeleteMapping("/matchWeek/{matchWeek_id}")
 	public List<PremMatchWeek> deleteMatchWeek(@PathVariable String matchWeek_id){
 			premMatchWeekService.deleteSingleMatchWeek(matchWeek_id);
 			return premMatchWeekService.allMatches();
 	}
 	
-	@PutMapping("/MatchWeek/{matchWeek_id}")
+	@PutMapping("/matchWeek/{matchWeek_id}")
 	public PremMatchWeek updateMatchWeek(@PathVariable String matchWeek_id,@RequestBody PremMatchWeek premMatchWeek){			
 		return premMatchWeekService.updateMatchWeek(matchWeek_id, premMatchWeek);
 	}
 	
-	@GetMapping("/teamResultsMatchWeek/{matchId}")
+	@GetMapping("/matchWeekMatchId/{matchId}")
 	public ResponseEntity<List<PremMatchWeek>> getResultsByMatchWeek(@PathVariable String matchId) {		
 		List<PremMatchWeek>  resultData = premMatchWeekService.getAllByMatchWeekId(matchId);
+		
 		return ResponseEntity.ok(resultData);
 	}
 
+	@GetMapping("/matchWeekIds")
+	public List<Integer> getMatchWeekIds(){
+		return premMatchWeekService.getAllMatchWeekDays();
+	}
 	
 //	@GetMapping("/teamSorting/{teamName}")
 //	public List<String> getSortedNames(@PathVariable String teamName){

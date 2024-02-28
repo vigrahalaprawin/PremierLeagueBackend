@@ -54,14 +54,15 @@ public class PremMatchWeekServiceImpl implements PremMatchWeekService {
 	      
 	      PremMatchWeek updatedTeam = premMatchWeekRepo.save(pmw); 
 	      return updatedTeam;
-	
 		}
 	
 	
-	public List<PremMatchWeek> getAllByMatchWeekId(String matchId){
-		
+	public List<PremMatchWeek> getAllByMatchWeekId(String matchId){	
 		return premMatchWeekRepo.findAllById(Long.parseLong(matchId));
+	}
 	
+	public List<Integer> getAllMatchWeekDays() {
+		return premMatchWeekRepo.getAllMatchWeekIds();
 	}
 
 

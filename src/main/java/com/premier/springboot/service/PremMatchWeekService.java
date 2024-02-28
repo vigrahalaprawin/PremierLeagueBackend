@@ -18,6 +18,8 @@ public interface PremMatchWeekService {
 
 	List<PremMatchWeek>  getAllByMatchWeekId(String matchId);
 	
+	List<Integer> getAllMatchWeekDays();
+	
 	
 
 }
