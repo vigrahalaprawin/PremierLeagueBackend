@@ -19,6 +19,8 @@ import com.premier.springboot.repository.PremMatchWeekRepository;
 import com.premier.springboot.repository.PremierRepository;
 import com.premier.springboot.service.PremierServiceRepo;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -46,7 +48,10 @@ public class PremierController {
 	
 	@GetMapping("/teams")
 	public List<PremierLeague> getAllTeams(){
-		return  premierRepository.findAll();		
+		List<PremierLeague> premTeams = premierRepository.findAll();
+		premTeams.sort(Comparator.comparing(PremierLeague:: getTeamName));
+		
+		return  premTeams;		
 	}
 	
 	@PostMapping("/addTeam")
@@ -87,7 +92,9 @@ public class PremierController {
 	
 	@GetMapping("/premierTeams")
 	public List<String> getAllPremierTeams() {
-	   return premierRepository.allPremierTeams();
+	   List<String> teamNames =  premierRepository.allPremierTeams();
+	   Collections.sort(teamNames);
+	   return teamNames;
 	  
 	}
 	
