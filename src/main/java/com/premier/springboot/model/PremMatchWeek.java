@@ -1,5 +1,6 @@
 package com.premier.springboot.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,11 +18,18 @@ public class PremMatchWeek {
 	
 	
 	
-	
+	@Column(nullable = false)
 	private String homeTeam;
+	
+	@Column(nullable = false)
 	private String awayTeam;
+	
+	
 	private int homeScore;
+	
 	private int AwayScore;
+	
+	@Column(nullable = false)
 	private int  matchWeek;
 	
 	
