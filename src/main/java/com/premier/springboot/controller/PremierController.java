@@ -93,7 +93,7 @@ public class PremierController {
 	@GetMapping("/premierTeams")
 	public List<String> getAllPremierTeams() {
 	   List<String> teamNames =  premierRepository.allPremierTeams();
-	   Collections.sort(teamNames);
+		   Collections.sort(teamNames);
 	   return teamNames;
 	  
 	}
