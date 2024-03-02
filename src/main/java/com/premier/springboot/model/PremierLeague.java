@@ -1,5 +1,6 @@
 package com.premier.springboot.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,9 +16,13 @@ public class PremierLeague {
 	@GeneratedValue(strategy= GenerationType.SEQUENCE)
 	private Long id;
 	
+	@Column(nullable = false)
 	private String teamName;
+	
+	@Column(nullable = false)
 	private String teamCoach;
 	
+	@Column(nullable = false)
 	private String teamStadium;
 	
 	public PremierLeague() {

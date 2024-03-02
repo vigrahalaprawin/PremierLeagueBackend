@@ -1,5 +1,7 @@
 package com.premier.springboot.controller;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.premier.springboot.model.PremMatchWeek;
-
+import com.premier.springboot.model.PremierLeague;
 import com.premier.springboot.service.PremMatchWeekService;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -32,12 +34,16 @@ public class PremMatchWeekController {
 	
 	@GetMapping("/allMatchWeek")
 	public List<PremMatchWeek> allMatches(){
-		return premMatchWeekService.allMatches();
+		List<PremMatchWeek> sortedList = premMatchWeekService.allMatches();
+		sortedList.sort(Comparator.comparing(PremMatchWeek::getMatchWeek));	
+		return sortedList;
 	}
 	
 	@GetMapping("/matchWeekResults/{teamName}")
 	public List<PremMatchWeek> getIndividualTeamResults(@PathVariable String teamName){
-		return premMatchWeekService.individualMatchResult(teamName);
+		List<PremMatchWeek> sortedList = premMatchWeekService.individualMatchResult(teamName);
+		sortedList.sort(Comparator.comparing(PremMatchWeek::getMatchWeek));
+		return sortedList;
 	}
 	
 	
@@ -45,7 +51,7 @@ public class PremMatchWeekController {
 	@DeleteMapping("/matchWeek/{matchWeek_id}")
 	public List<PremMatchWeek> deleteMatchWeek(@PathVariable String matchWeek_id){
 			premMatchWeekService.deleteSingleMatchWeek(matchWeek_id);
-			return premMatchWeekService.allMatches();
+			return allMatches();
 	}
 	
 	@PutMapping("/matchWeek/{matchWeek_id}")
@@ -64,11 +70,5 @@ public class PremMatchWeekController {
 	public List<Integer> getMatchWeekIds(){
 		return premMatchWeekService.getAllMatchWeekDays();
 	}
-	
-//	@GetMapping("/teamSorting/{teamName}")
-//	public List<String> getSortedNames(@PathVariable String teamName){
-//		return premMatchWeekService.
-//	}
-//	
 	
 }
