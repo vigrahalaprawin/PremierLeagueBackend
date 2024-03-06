@@ -68,7 +68,8 @@ public class PremMatchWeekController {
 
 	@GetMapping("/matchWeekIds")
 	public List<Integer> getMatchWeekIds(){
-		return premMatchWeekService.getAllMatchWeekDays();
+		List<Integer> matchIds = premMatchWeekService.getAllMatchWeekDays();Collections.sort(matchIds);
+		return  matchIds;
 	}
 	
 }

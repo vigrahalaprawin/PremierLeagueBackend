@@ -2,8 +2,11 @@ package com.premier.springboot.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.premier.springboot.model.PremMatchWeek;
 
+@Repository
 public interface PremMatchWeekService {
 	
 	PremMatchWeek matchweekAdd(PremMatchWeek premMatchWeek);
