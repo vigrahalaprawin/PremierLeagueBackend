@@ -1,5 +1,7 @@
 package com.premier.springboot.model;
 
+
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,18 +18,31 @@ public class PremierLeague {
 	@GeneratedValue(strategy= GenerationType.SEQUENCE)
 	private Long id;
 	
-	@Column(nullable = false)
+	
+	@Column(name = "team_name",nullable = false)
 	private String teamName;
 	
-	@Column(nullable = false)
+	
+	@Column(name = "team_coach",nullable = false) 
 	private String teamCoach;
 	
-	@Column(nullable = false)
+	@Column(name = "team_stadium",nullable = false) 
 	private String teamStadium;
+
 	
 	public PremierLeague() {
+		
 		super();
 	}
+	
+	
+	public PremierLeague(Long id,String teamName) {
+	
+		this.id = id;
+		this.teamName = teamName;
+	}
+	
+
 	
 	
 	public PremierLeague(String teamName, String teamCoach, String teamStadium) {
@@ -36,6 +51,10 @@ public class PremierLeague {
 		this.teamCoach = teamCoach;
 		this.teamStadium = teamStadium;
 	}
+	
+
+
+	
 	
 	public Long getId() {
 		return id;
