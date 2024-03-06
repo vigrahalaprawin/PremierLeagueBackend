@@ -14,14 +14,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.premier.springboot.exception.ResourceNotFoundException;
 import com.premier.springboot.model.PremMatchWeek;
+
 import com.premier.springboot.model.PremierLeague;
 import com.premier.springboot.repository.PremMatchWeekRepository;
 import com.premier.springboot.repository.PremierRepository;
 import com.premier.springboot.service.PremierServiceRepo;
 
+import java.math.BigInteger;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
 
 @CrossOrigin(origins = "http://localhost:3000")
 
@@ -95,6 +98,14 @@ public class PremierController {
 	   List<String> teamNames =  premierRepository.allPremierTeams();
 		   Collections.sort(teamNames);
 	   return teamNames;
+	  
+	}
+	
+	@GetMapping("/premierTeamsWithId")
+	public List<PremierLeague> getAllPremierTeamsWithId() {
+	   List<PremierLeague> teamNamesWithId = premierServiceRepo.showPremTeamWithIds();
+	//  List<PremierLeague> sortedteamNamesWithId =  teamNamesWithId.stream().sorted(Comparator.comparing(PremierLeague::getTeamName)).collect(Collectors.toList());
+	   return teamNamesWithId;
 	  
 	}
 	
