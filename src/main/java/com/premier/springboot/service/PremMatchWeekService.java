@@ -23,6 +23,7 @@ public interface PremMatchWeekService {
 	
 	List<Integer> getAllMatchWeekDays();
 	
+	List<String> teamNamesSelectedonMatchWeek(String id);
 	
 
 }

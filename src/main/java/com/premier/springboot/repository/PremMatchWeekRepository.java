@@ -17,5 +17,8 @@ public interface PremMatchWeekRepository extends JpaRepository<PremMatchWeek, Lo
 	
 	@Query(value = "select distinct match_week from match_week",nativeQuery = true)
 	List<Integer> getAllMatchWeekIds();
+	
+	@Query(value = "select away_team,home_team from match_week where match_week=:matchId",nativeQuery = true)
+	List<Object[]> getAllmatchWeekteamNames(Long matchId);
 
 }
