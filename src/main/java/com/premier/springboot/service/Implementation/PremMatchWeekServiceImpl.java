@@ -1,7 +1,11 @@
 package com.premier.springboot.service.Implementation;
 
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,9 +21,7 @@ public class PremMatchWeekServiceImpl implements PremMatchWeekService {
 	
 	
 	@Autowired
-	PremMatchWeekRepository premMatchWeekRepo;
-	
-	
+	PremMatchWeekRepository premMatchWeekRepo;	
 
 	@Override
 	public PremMatchWeek matchweekAdd(PremMatchWeek premMatchWeek) {
@@ -28,12 +30,16 @@ public class PremMatchWeekServiceImpl implements PremMatchWeekService {
 
 	@Override
 	public List<PremMatchWeek> allMatches() {
-		return premMatchWeekRepo.findAll();
+		List<PremMatchWeek> sortedList = premMatchWeekRepo.findAll();
+		sortedList.sort(Comparator.comparing(PremMatchWeek::getMatchWeek));	
+		return sortedList;	 
 	}
 
 	@Override
-	public List<PremMatchWeek> individualMatchResult(String teamName) {
-		return premMatchWeekRepo.findAllSortedByteamName(teamName);
+	public List<PremMatchWeek> individualMatchResult(String teamName) {	
+		 List<PremMatchWeek> sortedList =premMatchWeekRepo.findAllSortedByteamName(teamName);
+		 sortedList.sort(Comparator.comparing(PremMatchWeek::getMatchWeek));	
+		 return sortedList;
 		}
 
 	
@@ -62,8 +68,23 @@ public class PremMatchWeekServiceImpl implements PremMatchWeekService {
 	}
 	
 	public List<Integer> getAllMatchWeekDays() {
-		return premMatchWeekRepo.getAllMatchWeekIds();
+		List<Integer> matchIds = premMatchWeekRepo.getAllMatchWeekIds();
+		Collections.sort(matchIds);
+		return matchIds ;
 	}
 
+	public List<String> teamNamesSelectedonMatchWeek(String id){
+		List<Object[]> resultObj =  premMatchWeekRepo.getAllmatchWeekteamNames(Long.parseLong(id));
+		List<String> teamNames = new ArrayList<>();
+		for (Object[] obj : resultObj) {
+		    if (obj != null) {
+		        teamNames.add((String) obj[0]);
+		        teamNames.add((String) obj[1]);
+		    }
+		}
+		return teamNames.stream().distinct().collect(Collectors.toList());
+	}
+	
+	
 
 }

@@ -2,7 +2,9 @@ package com.premier.springboot.service.Implementation;
 
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,9 +23,9 @@ public class PremierTeamServiceImpl implements PremierServiceRepo  {
 	PremierRepository premierRepository;
 	
 
-	
-	public List<String> getAllPremierTeams(){
-		  return premierRepository.allPremierTeams();	
+	@Override
+	public List<String> getAllPremierTeamNames(){		
+		  return premierRepository.allPremierTeams().stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList());	
 	}
 	
 	
@@ -53,6 +55,14 @@ public class PremierTeamServiceImpl implements PremierServiceRepo  {
 		    premierLeagues.add(premierLeague);
 		}
 		return premierLeagues;
+	}
+
+
+	@Override
+	public List<PremierLeague> getAllTeamsInfo() {
+		List<PremierLeague> premTeams = premierRepository.findAll();
+		premTeams.sort(Comparator.comparing(PremierLeague:: getTeamName));
+		return premTeams;
 	}
  
 
