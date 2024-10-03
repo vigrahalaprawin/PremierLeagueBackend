@@ -40,7 +40,7 @@ public class PremierController {
 	@RequestMapping("/")
 	public String homePage() {
 		return " We are in the PremierController home page ";
-	}
+	}  
 	
 	@GetMapping("/teams")
 	public ResponseEntity<List<PremierLeague>> getAllTeams(){
@@ -68,7 +68,7 @@ public class PremierController {
 	
 	@DeleteMapping("/deleteTeam/{id}")
 	public List<PremierLeague> deletePremTeam(@PathVariable String id){		
-		premierRepository.deleteById(Long.parseLong(id));
+		premierServiceRepo.deleteByIdFromTable(id);
 		return premierRepository.findAll();	
 	}
   

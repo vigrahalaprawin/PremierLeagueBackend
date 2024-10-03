@@ -13,6 +13,8 @@ public interface PremierServiceRepo {
 	
 	ResponseEntity<PremierLeague> updatePremTeam(String id,PremierLeague premLeague);
 	
+	void deleteByIdFromTable(String id);
+	
 	List<PremierLeague> showPremTeamWithIds();
 	
 	List<String> getAllPremierTeamNames();

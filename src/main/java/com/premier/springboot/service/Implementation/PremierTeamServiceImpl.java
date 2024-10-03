@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.premier.springboot.exception.ResourceNotFoundException;
 import com.premier.springboot.model.PremierLeague;
+import com.premier.springboot.repository.PremMatchWeekRepository;
 import com.premier.springboot.repository.PremierRepository;
 import com.premier.springboot.service.PremierServiceRepo;
 
@@ -21,6 +22,9 @@ public class PremierTeamServiceImpl implements PremierServiceRepo  {
 	
 	@Autowired
 	PremierRepository premierRepository;
+	
+	@Autowired
+	PremMatchWeekRepository premMatchWeekRepo;
 	
 
 	@Override
@@ -63,6 +67,18 @@ public class PremierTeamServiceImpl implements PremierServiceRepo  {
 		List<PremierLeague> premTeams = premierRepository.findAll();
 		premTeams.sort(Comparator.comparing(PremierLeague:: getTeamName));
 		return premTeams;
+	}
+	
+	
+	public void deleteByIdFromTable(String id) {
+	
+		PremierLeague pm  = premierRepository.getReferenceById(Long.parseLong(id));
+		premMatchWeekRepo.findAllSortedByteamName(pm.getTeamName()).stream().
+		forEach(p->premMatchWeekRepo.deleteById(p.getMatchId()));
+		premierRepository.deleteById(Long.parseLong(id));
+		
+		
+		
 	}
  
 

@@ -12,7 +12,7 @@ import com.premier.springboot.model.PremierLeague;
 @Repository
 public interface PremierRepository  extends JpaRepository<PremierLeague, Long>   {
 
-	 void deleteById(Long id);
+
 	
 	 @Query(value = "select team_name from premier",nativeQuery=true)
 	 List<String>   allPremierTeams();
