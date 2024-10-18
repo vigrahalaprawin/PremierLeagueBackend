@@ -40,6 +40,11 @@ public class PremMatchWeekController {
 		return premMatchWeekService.individualMatchResult(teamName);
 	}
 	
+	@GetMapping("/matchWeekResults/AwayTeams/{teamName}") //Getting Away  teams Selected from home team
+	public List<String> getSelectedAwayTeams(@PathVariable String teamName){
+		return premMatchWeekService.selectAwayTeamOptions(teamName);
+	}
+	
 	
 
 	@DeleteMapping("/matchWeek/{matchWeek_id}") //delete  with  Id
