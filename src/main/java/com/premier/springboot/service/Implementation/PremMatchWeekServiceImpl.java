@@ -41,6 +41,12 @@ public class PremMatchWeekServiceImpl implements PremMatchWeekService {
 		 sortedList.sort(Comparator.comparing(PremMatchWeek::getMatchWeek));	
 		 return sortedList;
 		}
+	
+	@Override
+	public List<String> selectAwayTeamOptions(String teamName) {	
+		 List<String> teamNames =premMatchWeekRepo.getAllSelectedAwayTeams(teamName);
+		 return teamNames;
+		}
 
 	
 	public void deleteSingleMatchWeek(String matchId) {
